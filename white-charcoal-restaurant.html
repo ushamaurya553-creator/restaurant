@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="White Charcoal Restaurant — A premium fine dining experience in Andheri West, Mumbai. World-class cuisine, live music, and elegant ambience.">
+<title>White Charcoal — Premium Fine Dining · Mumbai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --gold:#D4AF37;
+    --gold-light:#E8C84A;
+    --gold-dim:rgba(212,175,55,0.15);
+    --gold-glow:rgba(212,175,55,0.3);
+    --bg:#080808;
+    --bg2:#111111;
+    --card:#181818;
+    --text:#FFFFFF;
+    --grey:#B8B8B8;
+    --border:rgba(255,255,255,0.08);
+    --border-gold:rgba(212,175,55,0.25);
+    --serif:'Cormorant Garamond',serif;
+    --display:'Playfair Display',serif;
+    --sans:'Inter',sans-serif;
+    --ease-luxury:cubic-bezier(0.16,1,0.3,1);
+    --ease-silk:cubic-bezier(0.4,0,0.2,1);
+  }
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+    cursor:none;
+  }
+
+  /* ─── CUSTOM CURSOR ─────────────────────────────── */
+  #cursor{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:9999;transition:transform 0.1s ease;transform:translate(-50%,-50%)}
+  #cursor-ring{position:fixed;width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);pointer-events:none;z-index:9998;transition:all 0.15s var(--ease-silk);transform:translate(-50%,-50%);opacity:0.6}
+  body:hover #cursor{opacity:1}
+
+  /* ─── SCROLLBAR ─────────────────────────────────── */
+  ::-webkit-scrollbar{width:3px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+  /* ─── LOADING SCREEN ────────────────────────────── */
+  #loader{
+    position:fixed;inset:0;background:var(--bg);z-index:10000;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  .loader-logo{font-family:var(--serif);font-size:clamp(2rem,5vw,4rem);color:var(--gold);letter-spacing:0.3em;text-transform:uppercase;font-weight:300}
+  .loader-line{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin-top:2rem;transition:width 1.5s var(--ease-luxury)}
+  .loader-line.active{width:240px}
+  .loader-sub{margin-top:1.5rem;font-size:0.7rem;letter-spacing:0.4em;color:var(--grey);text-transform:uppercase;opacity:0;transition:opacity 0.5s ease 0.5s}
+  .loader-sub.active{opacity:1}
+
+  /* ─── NAVIGATION ────────────────────────────────── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    padding:1.5rem 4rem;
+    display:flex;align-items:center;justify-content:space-between;
+    transition:all 0.5s var(--ease-silk);
+  }
+  nav.scrolled{
+    background:rgba(8,8,8,0.85);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+    border-bottom:1px solid var(--border);
+    padding:1rem 4rem;
+  }
+  .nav-logo{
+    font-family:var(--serif);font-size:1.5rem;letter-spacing:0.2em;
+    color:var(--gold);text-transform:uppercase;text-decoration:none;font-weight:300;
+  }
+  .nav-links{display:flex;gap:2.5rem;list-style:none}
+  .nav-links a{
+    font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:rgba(255,255,255,0.7);text-decoration:none;
+    transition:color 0.3s ease;position:relative;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;
+    background:var(--gold);transition:width 0.3s var(--ease-luxury);
+  }
+  .nav-links a:hover{color:var(--gold)}
+  .nav-links a:hover::after{width:100%}
+  .nav-reserve{
+    background:transparent;border:1px solid var(--gold);
+    color:var(--gold);padding:0.6rem 1.5rem;
+    font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+    cursor:pointer;transition:all 0.3s ease;text-decoration:none;
+    font-family:var(--sans);
+  }
+  .nav-reserve:hover{background:var(--gold);color:var(--bg)}
+
+  /* ─── HERO ──────────────────────────────────────── */
+  #hero{
+    position:relative;height:100vh;min-height:700px;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-slides{position:absolute;inset:0}
+  .hero-slide{
+    position:absolute;inset:0;opacity:0;
+    transition:opacity 1.8s var(--ease-silk);
+    background-size:cover;background-position:center;
+  }
+  .hero-slide.active{opacity:1}
+  .hero-slide::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(8,8,8,0.75) 0%,rgba(8,8,8,0.3) 50%,rgba(8,8,8,0.55) 100%);
+  }
+  .hero-content{
+    position:relative;z-index:2;text-align:center;
+    max-width:900px;padding:0 2rem;
+  }
+  .hero-eyebrow{
+    font-size:0.65rem;letter-spacing:0.5em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1.5rem;
+    opacity:0;animation:fadeInUp 1s 0.5s var(--ease-luxury) forwards;
+  }
+  .hero-title{
+    font-family:var(--serif);
+    font-size:clamp(4rem,10vw,9rem);
+    font-weight:300;line-height:0.9;
+    letter-spacing:-0.01em;
+    margin-bottom:1rem;
+    opacity:0;animation:fadeInUp 1s 0.8s var(--ease-luxury) forwards;
+  }
+  .hero-title span{font-style:italic;color:var(--gold)}
+  .hero-subtitle{
+    font-family:var(--serif);font-size:clamp(1.2rem,2.5vw,1.8rem);
+    color:var(--grey);font-weight:300;font-style:italic;
+    margin-bottom:3rem;
+    opacity:0;animation:fadeInUp 1s 1.1s var(--ease-luxury) forwards;
+  }
+  .hero-ctas{
+    display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;
+    opacity:0;animation:fadeInUp 1s 1.4s var(--ease-luxury) forwards;
+  }
+  .btn-gold{
+    background:var(--gold);color:var(--bg);
+    padding:1rem 2.5rem;font-size:0.7rem;letter-spacing:0.2em;
+    text-transform:uppercase;border:none;cursor:pointer;
+    text-decoration:none;transition:all 0.3s ease;display:inline-block;
+    font-family:var(--sans);font-weight:500;position:relative;overflow:hidden;
+  }
+  .btn-gold::before{
+    content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);
+    transform:translateX(-100%);transition:transform 0.5s var(--ease-luxury);
+  }
+  .btn-gold:hover::before{transform:translateX(0)}
+  .btn-outline{
+    background:transparent;color:var(--text);
+    padding:1rem 2.5rem;font-size:0.7rem;letter-spacing:0.2em;
+    text-transform:uppercase;border:1px solid rgba(255,255,255,0.3);
+    cursor:pointer;text-decoration:none;transition:all 0.3s ease;
+    display:inline-block;font-family:var(--sans);
+  }
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+  .hero-scroll{
+    position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+    opacity:0;animation:fadeInUp 1s 2s var(--ease-luxury) forwards;
+  }
+  .scroll-text{font-size:0.6rem;letter-spacing:0.3em;color:var(--grey);text-transform:uppercase}
+  .scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite}
+  .hero-indicators{
+    position:absolute;right:3rem;top:50%;transform:translateY(-50%);
+    display:flex;flex-direction:column;gap:0.5rem;z-index:3;
+  }
+  .hero-dot{
+    width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);
+    cursor:pointer;transition:all 0.3s ease;
+  }
+  .hero-dot.active{background:var(--gold);transform:scale(1.3)}
+
+  /* ─── SECTION SHARED ────────────────────────────── */
+  section{position:relative}
+  .container{max-width:1400px;margin:0 auto;padding:0 4rem}
+  .section-eyebrow{
+    font-size:0.65rem;letter-spacing:0.5em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1rem;display:block;
+  }
+  .section-title{
+    font-family:var(--serif);
+    font-size:clamp(2.5rem,5vw,5rem);
+    font-weight:300;line-height:1;letter-spacing:-0.01em;
+  }
+  .section-title em{font-style:italic;color:var(--gold)}
+  .gold-divider{
+    width:60px;height:1px;background:var(--gold);
+    margin:2rem 0;
+  }
+  .reveal{opacity:0;transform:translateY(40px);transition:all 0.9s var(--ease-luxury)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-left{opacity:0;transform:translateX(-40px);transition:all 0.9s var(--ease-luxury)}
+  .reveal-left.visible{opacity:1;transform:translateX(0)}
+  .reveal-right{opacity:0;transform:translateX(40px);transition:all 0.9s var(--ease-luxury)}
+  .reveal-right.visible{opacity:1;transform:translateX(0)}
+
+  /* ─── ABOUT ─────────────────────────────────────── */
+  #about{padding:10rem 0;background:var(--bg)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+  .about-images{position:relative;height:700px}
+  .about-img-main{
+    position:absolute;top:0;left:0;width:72%;height:80%;
+    object-fit:cover;filter:brightness(0.9);
+  }
+  .about-img-accent{
+    position:absolute;bottom:0;right:0;width:55%;height:55%;
+    object-fit:cover;border:4px solid var(--bg);
+  }
+  .about-img-badge{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:110px;height:110px;border-radius:50%;
+    background:var(--gold);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    z-index:2;
+  }
+  .about-img-badge span:first-child{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--bg);line-height:1}
+  .about-img-badge span:last-child{font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--bg);font-weight:500}
+  .about-text p{color:var(--grey);line-height:1.9;font-size:1rem;margin-bottom:1.5rem}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+  .stat{border-left:1px solid var(--border-gold);padding-left:1.5rem}
+  .stat-num{font-family:var(--serif);font-size:2.5rem;font-weight:300;color:var(--gold)}
+  .stat-label{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--grey);margin-top:0.25rem}
+
+  /* ─── WHY CHOOSE US ─────────────────────────────── */
+  #why{padding:10rem 0;background:var(--bg2)}
+  .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:5rem}
+  .feature-card{
+    background:var(--card);border:1px solid var(--border);
+    padding:2.5rem 2rem;
+    transition:all 0.4s var(--ease-luxury);
+    position:relative;overflow:hidden;
+  }
+  .feature-card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,var(--gold-dim),transparent);
+    opacity:0;transition:opacity 0.4s ease;
+  }
+  .feature-card:hover{border-color:var(--border-gold);transform:translateY(-4px)}
+  .feature-card:hover::before{opacity:1}
+  .feature-icon{
+    width:52px;height:52px;border:1px solid var(--border-gold);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:1.5rem;font-size:1.3rem;
+  }
+  .feature-title{
+    font-family:var(--serif);font-size:1.3rem;font-weight:400;
+    margin-bottom:0.75rem;color:var(--text);
+  }
+  .feature-desc{color:var(--grey);font-size:0.875rem;line-height:1.8}
+
+  /* ─── MENU ──────────────────────────────────────── */
+  #menu{padding:10rem 0;background:var(--bg)}
+  .menu-tabs{
+    display:flex;gap:0;margin:4rem 0;
+    border-bottom:1px solid var(--border);overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .menu-tabs::-webkit-scrollbar{display:none}
+  .menu-tab{
+    padding:1rem 2rem;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--grey);cursor:pointer;background:none;border:none;
+    border-bottom:2px solid transparent;transition:all 0.3s ease;
+    white-space:nowrap;margin-bottom:-1px;font-family:var(--sans);
+  }
+  .menu-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+  .menu-tab:hover{color:var(--text)}
+  .menu-panel{display:none}
+  .menu-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .menu-card{
+    background:var(--card);border:1px solid var(--border);
+    overflow:hidden;transition:all 0.4s var(--ease-luxury);
+    cursor:pointer;
+  }
+  .menu-card:hover{border-color:var(--border-gold);transform:translateY(-3px)}
+  .menu-card-img{
+    width:100%;height:200px;object-fit:cover;
+    transition:transform 0.7s var(--ease-luxury);display:block;
+  }
+  .menu-card:hover .menu-card-img{transform:scale(1.06)}
+  .menu-card-body{padding:1.25rem 1.5rem 1.5rem}
+  .menu-card-tag{font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+  .menu-card-name{font-family:var(--serif);font-size:1.15rem;font-weight:400;margin-bottom:0.5rem}
+  .menu-card-desc{font-size:0.8rem;color:var(--grey);line-height:1.7;margin-bottom:1rem}
+  .menu-card-footer{display:flex;justify-content:space-between;align-items:center}
+  .menu-card-price{font-family:var(--serif);font-size:1.1rem;color:var(--gold)}
+  .menu-card-badge{
+    font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;
+    padding:0.25rem 0.75rem;border:1px solid var(--border-gold);color:var(--gold);
+  }
+
+  /* ─── GALLERY ───────────────────────────────────── */
+  #gallery{padding:10rem 0;background:var(--bg2)}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    grid-template-rows:auto;
+    gap:1rem;margin-top:4rem;
+  }
+  .gallery-item{overflow:hidden;cursor:pointer;position:relative}
+  .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.8s var(--ease-luxury)}
+  .gallery-item:hover img{transform:scale(1.07)}
+  .gallery-item::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(8,8,8,0.7),transparent);
+    opacity:0;transition:opacity 0.4s ease;
+  }
+  .gallery-item:hover::after{opacity:1}
+  .g1{grid-column:span 5;grid-row:span 2;height:500px}
+  .g2{grid-column:span 4;height:240px}
+  .g3{grid-column:span 3;height:240px}
+  .g4{grid-column:span 4;height:240px}
+  .g5{grid-column:span 3;height:240px}
+  .g6{grid-column:span 4;height:300px}
+  .g7{grid-column:span 4;height:300px}
+  .g8{grid-column:span 4;height:300px}
+
+  /* ─── LIGHTBOX ──────────────────────────────────── */
+  #lightbox{
+    position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9000;
+    display:none;align-items:center;justify-content:center;
+    backdrop-filter:blur(10px);
+  }
+  #lightbox.open{display:flex}
+  .lightbox-img{max-width:90vw;max-height:90vh;object-fit:contain}
+  .lightbox-close{
+    position:absolute;top:2rem;right:2rem;background:none;border:none;
+    color:var(--text);font-size:2rem;cursor:pointer;opacity:0.6;
+    transition:opacity 0.2s;
+  }
+  .lightbox-close:hover{opacity:1}
+
+  /* ─── EXPERIENCE ────────────────────────────────── */
+  #experience{
+    height:90vh;min-height:600px;
+    position:relative;overflow:hidden;display:flex;align-items:center;
+  }
+  .experience-bg{
+    position:absolute;inset:0;
+    background-size:cover;background-position:center;
+    background-attachment:fixed;
+  }
+  .experience-bg::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(8,8,8,0.85),rgba(8,8,8,0.4));
+  }
+  .experience-content{
+    position:relative;z-index:2;padding:0 4rem;max-width:700px;
+  }
+  .experience-content .section-title{font-size:clamp(3rem,6vw,6rem)}
+  .experience-text{color:var(--grey);font-size:1.05rem;line-height:1.9;margin:2rem 0 3rem}
+  .experience-tags{display:flex;flex-wrap:wrap;gap:0.75rem}
+  .tag{
+    font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+    padding:0.5rem 1rem;border:1px solid var(--border-gold);color:var(--gold);
+  }
+
+  /* ─── TESTIMONIALS ──────────────────────────────── */
+  #testimonials{padding:10rem 0;background:var(--bg)}
+  .reviews-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:5rem}
+  .rating-display{text-align:right}
+  .rating-num{font-family:var(--serif);font-size:4rem;font-weight:300;color:var(--gold);line-height:1}
+  .stars{color:var(--gold);font-size:1.2rem;letter-spacing:0.1em;margin:0.5rem 0}
+  .rating-count{font-size:0.8rem;color:var(--grey);letter-spacing:0.1em}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .review-card{
+    background:var(--card);border:1px solid var(--border);
+    padding:2.5rem;transition:all 0.4s var(--ease-luxury);
+    position:relative;
+  }
+  .review-card:hover{border-color:var(--border-gold);transform:translateY(-3px)}
+  .review-card::before{
+    content:'"';font-family:var(--serif);font-size:5rem;line-height:0.5;
+    color:var(--gold);opacity:0.2;position:absolute;top:2rem;right:2rem;
+  }
+  .review-stars{color:var(--gold);margin-bottom:1.25rem;font-size:0.85rem}
+  .review-text{color:var(--grey);font-size:0.9rem;line-height:1.85;margin-bottom:1.5rem;font-style:italic}
+  .reviewer{display:flex;align-items:center;gap:0.875rem}
+  .reviewer-avatar{
+    width:42px;height:42px;border-radius:50%;
+    background:var(--gold);display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:1rem;color:var(--bg);font-weight:400;
+    flex-shrink:0;
+  }
+  .reviewer-name{font-size:0.875rem;font-weight:500;margin-bottom:0.2rem}
+  .reviewer-date{font-size:0.75rem;color:var(--grey)}
+
+  /* ─── RESERVATION ───────────────────────────────── */
+  #reservation{padding:10rem 0;background:var(--bg2)}
+  .reservation-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+  .reservation-image{
+    position:relative;height:600px;overflow:hidden;
+  }
+  .reservation-image img{width:100%;height:100%;object-fit:cover}
+  .reservation-image::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to right,transparent,var(--bg2));
+  }
+  .reservation-form{max-width:500px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+  .form-group{margin-bottom:1rem}
+  .form-label{
+    display:block;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--grey);margin-bottom:0.5rem;
+  }
+  .form-input{
+    width:100%;background:var(--card);border:1px solid var(--border);
+    color:var(--text);padding:0.875rem 1.25rem;font-size:0.9rem;
+    font-family:var(--sans);transition:border-color 0.3s ease;outline:none;
+  }
+  .form-input:focus{border-color:var(--gold)}
+  .form-input::placeholder{color:rgba(255,255,255,0.2)}
+  textarea.form-input{resize:vertical;min-height:120px}
+  .form-submit{
+    width:100%;margin-top:1.5rem;
+    background:var(--gold);color:var(--bg);
+    padding:1.1rem;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;
+    border:none;cursor:pointer;font-family:var(--sans);font-weight:500;
+    transition:all 0.3s ease;
+  }
+  .form-submit:hover{background:var(--gold-light)}
+  select.form-input option{background:var(--card)}
+
+  /* ─── FACILITIES ────────────────────────────────── */
+  #facilities{padding:8rem 0;background:var(--bg)}
+  .facilities-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;margin-top:4rem}
+  .facility-item{
+    display:flex;flex-direction:column;align-items:center;gap:1rem;
+    padding:2rem 1rem;background:var(--card);border:1px solid var(--border);
+    text-align:center;transition:all 0.3s ease;
+  }
+  .facility-item:hover{border-color:var(--border-gold)}
+  .facility-icon{font-size:1.5rem;line-height:1}
+  .facility-name{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey)}
+
+  /* ─── CONTACT ───────────────────────────────────── */
+  #contact{padding:10rem 0;background:var(--bg2)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+  .contact-map{
+    height:450px;background:var(--card);border:1px solid var(--border);
+    overflow:hidden;position:relative;
+  }
+  .contact-map iframe{width:100%;height:100%;border:none;filter:grayscale(1) invert(0.9) contrast(0.85)}
+  .contact-info{display:flex;flex-direction:column;gap:2.5rem}
+  .contact-item{display:flex;gap:1.5rem;align-items:flex-start}
+  .contact-icon{
+    width:44px;height:44px;border:1px solid var(--border-gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;flex-shrink:0;margin-top:0.2rem;
+  }
+  .contact-item-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+  .contact-item-value{color:var(--text);line-height:1.7;font-size:0.95rem}
+  .contact-item-value a{color:var(--text);text-decoration:none;transition:color 0.2s ease}
+  .contact-item-value a:hover{color:var(--gold)}
+  .hours-row{display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border)}
+  .hours-row:last-child{border-bottom:none}
+  .hours-day{color:var(--grey);font-size:0.875rem}
+  .hours-time{color:var(--text);font-size:0.875rem}
+
+  /* ─── FOOTER ────────────────────────────────────── */
+  footer{background:var(--card);border-top:1px solid var(--border)}
+  .footer-top{
+    padding:5rem 4rem;display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;
+  }
+  .footer-brand{max-width:300px}
+  .footer-logo{font-family:var(--serif);font-size:1.8rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;font-weight:300;margin-bottom:1.25rem;display:block}
+  .footer-tagline{color:var(--grey);font-size:0.875rem;line-height:1.8;margin-bottom:2rem;font-style:italic;font-family:var(--serif)}
+  .social-links{display:flex;gap:1rem}
+  .social-link{
+    width:38px;height:38px;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--grey);font-size:0.8rem;text-decoration:none;
+    transition:all 0.3s ease;
+  }
+  .social-link:hover{border-color:var(--gold);color:var(--gold)}
+  .footer-col-title{
+    font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1.5rem;
+  }
+  .footer-links{list-style:none;display:flex;flex-direction:column;gap:0.75rem}
+  .footer-links a{color:var(--grey);text-decoration:none;font-size:0.875rem;transition:color 0.3s ease}
+  .footer-links a:hover{color:var(--gold)}
+  .footer-bottom{
+    padding:1.5rem 4rem;
+    border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .footer-copy{font-size:0.75rem;color:rgba(255,255,255,0.3);letter-spacing:0.1em}
+  .footer-legal{display:flex;gap:2rem}
+  .footer-legal a{font-size:0.75rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.3s ease}
+  .footer-legal a:hover{color:var(--gold)}
+
+  /* ─── FLOATING RESERVE ──────────────────────────── */
+  .float-reserve{
+    position:fixed;right:2rem;bottom:2.5rem;z-index:900;
+    background:var(--gold);color:var(--bg);
+    padding:0.875rem 1.75rem;font-size:0.65rem;letter-spacing:0.2em;
+    text-transform:uppercase;font-family:var(--sans);font-weight:500;
+    text-decoration:none;border:none;cursor:pointer;
+    opacity:0;transform:translateY(20px);
+    transition:all 0.4s var(--ease-luxury);
+    box-shadow:0 8px 32px rgba(212,175,55,0.3);
+  }
+  .float-reserve.visible{opacity:1;transform:translateY(0)}
+  .float-reserve:hover{background:var(--gold-light);box-shadow:0 12px 40px rgba(212,175,55,0.4)}
+
+  /* ─── ANIMATIONS ────────────────────────────────── */
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes scrollPulse{0%,100%{opacity:0.4;transform:scaleY(0.7) translateY(-20px)}50%{opacity:1;transform:scaleY(1) translateY(0)}}
+  @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+
+  /* ─── GOLD SHIMMER TEXT ─────────────────────────── */
+  .gold-shimmer{
+    background:linear-gradient(90deg,var(--gold) 0%,#F5D87B 30%,var(--gold) 50%,#C9A227 80%,var(--gold) 100%);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    animation:shimmer 4s linear infinite;
+  }
+
+  /* ─── RESPONSIVE ────────────────────────────────── */
+  @media(max-width:1200px){
+    .features-grid{grid-template-columns:repeat(2,1fr)}
+    .menu-panel.active{grid-template-columns:repeat(2,1fr)}
+    .footer-top{grid-template-columns:1fr 1fr}
+    .facilities-grid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:900px){
+    nav{padding:1.25rem 2rem}
+    nav.scrolled{padding:1rem 2rem}
+    .nav-links{display:none}
+    .container{padding:0 2rem}
+    .about-grid,.reservation-grid,.contact-grid{grid-template-columns:1fr}
+    .about-images{height:400px}
+    .reviews-grid{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:1fr 1fr}
+    .g1,.g2,.g3,.g4,.g5,.g6,.g7,.g8{grid-column:span 1;height:220px}
+    .footer-top{grid-template-columns:1fr;padding:3rem 2rem}
+    .footer-bottom{padding:1.5rem 2rem;flex-direction:column;gap:1rem;text-align:center}
+    .float-reserve{right:1rem;bottom:1.5rem}
+    .facilities-grid{grid-template-columns:repeat(2,1fr)}
+    .form-row{grid-template-columns:1fr}
+    .experience-content{padding:0 2rem}
+    .reviews-header{flex-direction:column;align-items:flex-start;gap:2rem}
+  }
+  @media(max-width:600px){
+    .hero-title{font-size:3.5rem}
+    .features-grid{grid-template-columns:1fr}
+    .menu-panel.active{grid-template-columns:1fr}
+    .footer-legal{flex-direction:column;gap:0.5rem}
+    body{cursor:auto}
+    #cursor,#cursor-ring{display:none}
+  }
+
+  /* ─── MENU CATEGORY LABELS ──────────────────────── */
+  .menu-section-heading{
+    font-family:var(--serif);font-size:1.8rem;font-weight:300;font-style:italic;
+    color:var(--gold);margin:3rem 0 1.5rem;grid-column:1/-1;
+    padding-bottom:0.75rem;border-bottom:1px solid var(--border-gold);
+  }
+
+  /* ─── NOTIFICATION TOAST ────────────────────────── */
+  .toast{
+    position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--gold);color:var(--bg);
+    padding:1rem 2rem;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
+    z-index:9999;opacity:0;transition:all 0.4s var(--ease-luxury);pointer-events:none;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">White Charcoal</div>
+  <div class="loader-line" id="loader-line"></div>
+  <div class="loader-sub" id="loader-sub">Fine Dining · Mumbai</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Reservation Request Sent</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+</div>
+
+<!-- FLOATING RESERVE -->
+<a href="#reservation" class="float-reserve" id="floatReserve">Reserve a Table</a>
+
+<!-- NAVIGATION -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">White Charcoal</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#reservation" class="nav-reserve">Reserve Now</a>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=85')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=85')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?w=1920&q=85')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1920&q=85')"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Andheri West · Mumbai · Est. 2018</div>
+    <h1 class="hero-title">White<br><em>Charcoal</em></h1>
+    <p class="hero-subtitle">A Culinary Journey Beyond the Ordinary</p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-gold">Explore Menu</a>
+      <a href="#reservation" class="btn-outline">Reserve a Table</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+  <div class="hero-indicators" id="heroIndicators">
+    <div class="hero-dot active" onclick="goToSlide(0)"></div>
+    <div class="hero-dot" onclick="goToSlide(1)"></div>
+    <div class="hero-dot" onclick="goToSlide(2)"></div>
+    <div class="hero-dot" onclick="goToSlide(3)"></div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-images reveal-left">
+        <img class="about-img-main" src="https://images.unsplash.com/photo-1543007631-283050bb3e8c?w=800&q=85" alt="White Charcoal Interior">
+        <img class="about-img-accent" src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&q=85" alt="Fine Dining Setup">
+        <div class="about-img-badge">
+          <span>7+</span>
+          <span>Years of Excellence</span>
+        </div>
+      </div>
+      <div class="about-text reveal-right">
+        <span class="section-eyebrow">Our Story</span>
+        <h2 class="section-title">Where Flavour<br>Meets <em>Finesse</em></h2>
+        <div class="gold-divider"></div>
+        <p>White Charcoal was born from a singular obsession — to craft a dining experience that transcends the ordinary. Nestled in the heart of Andheri West, our restaurant blends the warmth of Indian hospitality with the sophistication of global fine dining.</p>
+        <p>Every plate that leaves our kitchen carries the signature of our world-class chefs — masters of flavour who source only the finest ingredients, celebrating seasonality and provenance with every dish.</p>
+        <p>From our intimate dining room lit by amber candlelight to the sultry notes of live jazz drifting through the air, White Charcoal invites you to slow down, savour, and celebrate.</p>
+        <div class="about-stats">
+          <div class="stat reveal">
+            <div class="stat-num">4.4★</div>
+            <div class="stat-label">Google Rating</div>
+          </div>
+          <div class="stat reveal">
+            <div class="stat-num">483+</div>
+            <div class="stat-label">Reviews</div>
+          </div>
+          <div class="stat reveal">
+            <div class="stat-num">250+</div>
+            <div class="stat-label">Menu Items</div>
+          </div>
+          <div class="stat reveal">
+            <div class="stat-num">5★</div>
+            <div class="stat-label">Hospitality</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY CHOOSE US ──────────────────────────────── -->
+<section id="why">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto" class="reveal">
+      <span class="section-eyebrow">The White Charcoal Difference</span>
+      <h2 class="section-title">Crafted for the<br><em>Discerning</em> Palate</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-title">Premium Ingredients</div>
+        <p class="feature-desc">Sourced from artisanal farms and global markets — only the finest make it to our kitchen.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">👨‍🍳</div>
+        <div class="feature-title">World-Class Chefs</div>
+        <p class="feature-desc">Our culinary team brings decades of experience from Michelin-starred kitchens across three continents.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🎵</div>
+        <div class="feature-title">Live Music Nights</div>
+        <p class="feature-desc">Curated live performances every Friday and Saturday — jazz, blues, and contemporary acoustic sets.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🥂</div>
+        <div class="feature-title">Premium Cocktails</div>
+        <p class="feature-desc">Our bar team crafts bespoke cocktails using artisan spirits, fresh botanicals, and house-made infusions.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🕯️</div>
+        <div class="feature-title">Elegant Interiors</div>
+        <p class="feature-desc">A thoughtfully designed space — warm textures, dramatic lighting, and intimate corners for every occasion.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🚗</div>
+        <div class="feature-title">Private Dining</div>
+        <p class="feature-desc">Exclusive private rooms for celebrations, corporate events, and intimate gatherings of all sizes.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌱</div>
+        <div class="feature-title">Vegetarian Selection</div>
+        <p class="feature-desc">A dedicated seasonal vegetarian menu with zero compromise on luxury, flavour, or presentation.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🍷</div>
+        <div class="feature-title">Curated Wine List</div>
+        <p class="feature-desc">From old-world Burgundies to new-world surprises — our sommelier pairs your meal with the perfect bottle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MENU ──────────────────────────────────────── -->
+<section id="menu">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">Our Menu</span>
+      <h2 class="section-title">A Symphony of<br><em>Flavour & Craft</em></h2>
+    </div>
+    <div class="menu-tabs" role="tablist">
+      <button class="menu-tab active" onclick="switchTab('starters-veg')">Veg Starters</button>
+      <button class="menu-tab" onclick="switchTab('starters-nonveg')">Non-Veg Starters</button>
+      <button class="menu-tab" onclick="switchTab('mains')">Main Course</button>
+      <button class="menu-tab" onclick="switchTab('pasta')">Pasta</button>
+      <button class="menu-tab" onclick="switchTab('desserts')">Desserts</button>
+      <button class="menu-tab" onclick="switchTab('drinks')">Drinks & Bar</button>
+    </div>
+
+    <!-- Veg Starters -->
+    <div class="menu-panel active" id="tab-starters-veg">
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1513442542250-854d436a73f2?w=500&q=80" alt="Loaded Nachos">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Starter</div>
+          <div class="menu-card-name">Loaded Nachos</div>
+          <p class="menu-card-desc">Crisp tortilla chips piled high with jalapeños, pico de gallo, guacamole, sour cream and nacho cheese.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 395</div>
+            <div class="menu-card-badge">Bestseller</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?w=500&q=80" alt="Avocado Toast">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Starter</div>
+          <div class="menu-card-name">Smashed Avocado Toast</div>
+          <p class="menu-card-desc">Sourdough toast with smashed avocado, chilli flakes, microgreens, poached egg and a squeeze of lemon.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 345</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&q=80" alt="Paneer Tikka">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Starter</div>
+          <div class="menu-card-name">Paneer Tikka</div>
+          <p class="menu-card-desc">Tandoor-kissed paneer cubes marinated in saffron and spice, served with mint chutney and onion salad.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 425</div>
+            <div class="menu-card-badge">Chef's Pick</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&q=80" alt="Mexican Tacos">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Starter</div>
+          <div class="menu-card-name">Mexican Vegetarian Tacos</div>
+          <p class="menu-card-desc">Soft flour tortillas filled with black beans, corn salsa, shredded cheese, pickled cabbage and chipotle mayo.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 365</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=500&q=80" alt="French Fries">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Starter</div>
+          <div class="menu-card-name">Truffle French Fries</div>
+          <p class="menu-card-desc">Double-fried golden fries tossed in black truffle oil, parmesan shavings and fresh herbs.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 295</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=500&q=80" alt="Potato Wedges">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Starter</div>
+          <div class="menu-card-name">Spiced Potato Wedges</div>
+          <p class="menu-card-desc">Skin-on potato wedges seasoned with smoked paprika, rosemary and garlic, served with aioli.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 255</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Non-Veg Starters -->
+    <div class="menu-panel" id="tab-starters-nonveg">
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=500&q=80" alt="Butter Garlic Prawns">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Starter</div>
+          <div class="menu-card-name">Butter Garlic Prawns</div>
+          <p class="menu-card-desc">Jumbo tiger prawns sautéed in white wine, roasted garlic, fresh herbs and a touch of cream.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 695</div>
+            <div class="menu-card-badge">Signature</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=500&q=80" alt="Chicken Wings">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Starter</div>
+          <div class="menu-card-name">Crispy Chicken Wings</div>
+          <p class="menu-card-desc">Double-fried wings with your choice of buffalo hot sauce, honey sriracha, or teriyaki glaze.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 495</div>
+            <div class="menu-card-badge">Bestseller</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80" alt="Chicken Skewers">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Starter</div>
+          <div class="menu-card-name">Chicken Skewers</div>
+          <p class="menu-card-desc">Tender marinated chicken thighs on charcoal skewers with chermoula, sumac onions and tahini.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 545</div>
+            <div class="menu-card-badge">Chef's Pick</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1513706573-5f36b40e56de?w=500&q=80" alt="Fish Nuggets">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Starter</div>
+          <div class="menu-card-name">Crispy Fish Nuggets</div>
+          <p class="menu-card-desc">Beer-battered wild-caught fish pieces, served with tartare sauce and a wedge of lemon.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 465</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=500&q=80" alt="Chicken Nachos">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Starter</div>
+          <div class="menu-card-name">Chicken Loaded Nachos</div>
+          <p class="menu-card-desc">Crispy nachos with pulled smoked chicken, jalapeños, guacamole, pico de gallo and cheddar cheese sauce.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 495</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=500&q=80" alt="Yakitori Chicken">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Starter</div>
+          <div class="menu-card-name">Yakitori Chicken</div>
+          <p class="menu-card-desc">Japanese-style charcoal-grilled chicken skewers glazed with tare sauce, served with pickled daikon.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 525</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Course -->
+    <div class="menu-panel" id="tab-mains">
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1598103442097-8b74394b95c8?w=500&q=80" alt="Grilled Chicken">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Main</div>
+          <div class="menu-card-name">Pan-Seared Grilled Chicken</div>
+          <p class="menu-card-desc">Free-range chicken breast with charred broccolini, roasted garlic mash and herb jus.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 795</div>
+            <div class="menu-card-badge">Signature</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&q=80" alt="Mexican Rice">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Main</div>
+          <div class="menu-card-name">Mexican Fiesta Rice</div>
+          <p class="menu-card-desc">Tomato-spiced long grain rice with black beans, corn, peppers and fresh cilantro.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 445</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=500&q=80" alt="Lasagna">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Main</div>
+          <div class="menu-card-name">Chicken Lasagna</div>
+          <p class="menu-card-desc">Layered with slow-cooked chicken ragu, béchamel and three-cheese blend, baked golden.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 695</div>
+            <div class="menu-card-badge">Chef's Pick</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=500&q=80" alt="Grilled Fish">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Main</div>
+          <div class="menu-card-name">Grilled Barramundi</div>
+          <p class="menu-card-desc">Line-caught barramundi with lemon caper butter, sautéed greens and crispy capers.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 845</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1584178639036-613ba8a54800?w=500&q=80" alt="Chicken Burrito">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Non-Vegetarian · Main</div>
+          <div class="menu-card-name">Chicken Burrito</div>
+          <p class="menu-card-desc">Warm flour tortilla with spiced chicken, Mexican rice, beans, pico de gallo and sour cream.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 565</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=500&q=80" alt="Paneer Burrito">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Main</div>
+          <div class="menu-card-name">Paneer Burrito</div>
+          <p class="menu-card-desc">Spiced paneer tikka, Mexican rice, refried beans, guacamole and chipotle wrapped in a warm tortilla.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 525</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pasta -->
+    <div class="menu-panel" id="tab-pasta">
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=500&q=80" alt="Aglio Olio">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Pasta</div>
+          <div class="menu-card-name">Spaghetti Aglio Olio</div>
+          <p class="menu-card-desc">Classic Italian — spaghetti with slow-toasted garlic, extra virgin olive oil, chilli flakes and parsley.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 495</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=500&q=80" alt="Alfredo">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Pasta</div>
+          <div class="menu-card-name">Penne Alfredo</div>
+          <p class="menu-card-desc">Silky cream sauce with aged parmesan, butter and a touch of nutmeg — simple, luxurious perfection.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 515</div>
+            <div class="menu-card-badge">Bestseller</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1567608285969-48e4bbe0d399?w=500&q=80" alt="Arrabbiata">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Pasta</div>
+          <div class="menu-card-name">Penne Arrabbiata</div>
+          <p class="menu-card-desc">San Marzano tomato sauce with fire-roasted chilli, garlic and fresh basil — a fiery Italian classic.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 465</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=500&q=80" alt="Basil Pesto">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Pasta</div>
+          <div class="menu-card-name">Fusilli Basil Pesto</div>
+          <p class="menu-card-desc">House-made fresh basil pesto with pine nuts, parmesan and cherry tomatoes on spiral pasta.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 545</div>
+            <div class="menu-card-badge">Chef's Pick</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1600803907087-f56d462fd26b?w=500&q=80" alt="Mushroom Pasta">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Vegetarian · Pasta</div>
+          <div class="menu-card-name">Wild Mushroom Tagliatelle</div>
+          <p class="menu-card-desc">Hand-rolled tagliatelle with sautéed wild mushrooms, truffle oil, thyme and shaved parmesan.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 595</div>
+            <div class="menu-card-badge">Signature</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desserts -->
+    <div class="menu-panel" id="tab-desserts">
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=500&q=80" alt="Tres Leches">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Dessert</div>
+          <div class="menu-card-name">Tres Leches Cake</div>
+          <p class="menu-card-desc">Traditional Mexican sponge cake soaked in three milks, topped with fresh cream and cinnamon.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 375</div>
+            <div class="menu-card-badge">Bestseller</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&q=80" alt="Walnut Brownie">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Dessert</div>
+          <div class="menu-card-name">Warm Walnut Brownie</div>
+          <p class="menu-card-desc">Fudgy dark chocolate brownie with toasted walnuts, served warm with vanilla bean ice cream.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 345</div>
+            <div class="menu-card-badge">Chef's Pick</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=500&q=80" alt="Ice Cream">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Dessert</div>
+          <div class="menu-card-name">Artisan Ice Cream</div>
+          <p class="menu-card-desc">Three scoops of house-churned ice cream — seasonal flavours change daily. Ask your server for today's selection.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 295</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1587314168485-3236d6710814?w=500&q=80" alt="Gulab Jamun">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Dessert</div>
+          <div class="menu-card-name">Premium Gulab Jamun</div>
+          <p class="menu-card-desc">Khoya gulab jamun soaked in rose saffron syrup, served with rabri and crushed pistachios.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 325</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drinks -->
+    <div class="menu-panel" id="tab-drinks">
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500&q=80" alt="Coffee">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Coffee</div>
+          <div class="menu-card-name">Single Origin Espresso</div>
+          <p class="menu-card-desc">Sourced from the Coorg highlands — rich, complex, with notes of dark chocolate and stone fruit.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 195</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=500&q=80" alt="Cocktail">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Cocktails</div>
+          <div class="menu-card-name">Signature Cocktails</div>
+          <p class="menu-card-desc">Our bar team crafts bespoke cocktails — classics reimagined with premium spirits and fresh ingredients.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 495+</div>
+            <div class="menu-card-badge">Bar Special</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&q=80" alt="Wine">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Wine</div>
+          <div class="menu-card-name">Curated Wine Selection</div>
+          <p class="menu-card-desc">Old-world and new-world bottles hand-selected by our sommelier — available by glass or bottle.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 395+</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&q=80" alt="Mocktail">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Mocktails</div>
+          <div class="menu-card-name">Premium Mocktails</div>
+          <p class="menu-card-desc">House-crafted non-alcoholic concoctions with fresh fruit, herbs and artisan syrups — equally sophisticated.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 295</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=500&q=80" alt="Beer">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Beer</div>
+          <div class="menu-card-name">Craft Beer Selection</div>
+          <p class="menu-card-desc">Local and imported craft beers on tap and in bottle — IPAs, wheat beers, stouts and seasonal specials.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 295+</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-card-img" src="https://images.unsplash.com/photo-1593443320739-77f74939d0da?w=500&q=80" alt="Cold Coffee">
+        <div class="menu-card-body">
+          <div class="menu-card-tag">Coffee · Cold</div>
+          <div class="menu-card-name">Cold Brew & Cold Coffee</div>
+          <p class="menu-card-desc">18-hour cold brew, iced lattes and frappe blends made with our signature espresso blend.</p>
+          <div class="menu-card-footer">
+            <div class="menu-card-price">₹ 245</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ────────────────────────────────────── -->
+<section id="gallery">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto" class="reveal">
+      <span class="section-eyebrow">The Space</span>
+      <h2 class="section-title">A Visual <em>Feast</em><br>Before the First Bite</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item g1" onclick="openLightbox('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=90')">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" alt="Fine Dining Hall" loading="lazy">
+      </div>
+      <div class="gallery-item g2" onclick="openLightbox('https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&q=90')">
+        <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=700&q=80" alt="Bar Counter" loading="lazy">
+      </div>
+      <div class="gallery-item g3" onclick="openLightbox('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=90')">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Luxury Food" loading="lazy">
+      </div>
+      <div class="gallery-item g4" onclick="openLightbox('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=90')">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&q=80" alt="Restaurant Interior" loading="lazy">
+      </div>
+      <div class="gallery-item g5" onclick="openLightbox('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90')">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Fine Dining" loading="lazy">
+      </div>
+      <div class="gallery-item g6" onclick="openLightbox('https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1200&q=90')">
+        <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=700&q=80" alt="Dining Tables" loading="lazy">
+      </div>
+      <div class="gallery-item g7" onclick="openLightbox('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1200&q=90')">
+        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=700&q=80" alt="Premium Seating" loading="lazy">
+      </div>
+      <div class="gallery-item g8" onclick="openLightbox('https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?w=1200&q=90')">
+        <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?w=700&q=80" alt="Restaurant Ambience" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPERIENCE ────────────────────────────────── -->
+<section id="experience">
+  <div class="experience-bg" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=90')"></div>
+  <div class="experience-content">
+    <span class="section-eyebrow reveal">The White Charcoal Experience</span>
+    <h2 class="section-title reveal">Evenings That<br>Become <em>Memories</em></h2>
+    <p class="experience-text reveal">Every dinner at White Charcoal is orchestrated — from the soft amber light that greets you at the entrance to the final note of dessert. We don't just serve food. We curate moments: intimate conversations over candlelit tables, the warmth of exceptional hospitality, and the magic of live music on select evenings.</p>
+    <div class="experience-tags reveal">
+      <span class="tag">Live Music Nights</span>
+      <span class="tag">Private Dining</span>
+      <span class="tag">Tasting Menus</span>
+      <span class="tag">Sommelier Pairing</span>
+      <span class="tag">Chef's Table</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────────────── -->
+<section id="testimonials">
+  <div class="container">
+    <div class="reviews-header">
+      <div class="reveal">
+        <span class="section-eyebrow">What Guests Say</span>
+        <h2 class="section-title">Stories of<br><em>Unforgettable</em> Evenings</h2>
+      </div>
+      <div class="rating-display reveal">
+        <div class="rating-num gold-shimmer">4.4</div>
+        <div class="stars">★★★★½</div>
+        <div class="rating-count">Based on 483+ Google Reviews</div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">White Charcoal has redefined what dining out means to me. The ambience is absolutely cinematic — low lighting, rich textures, and live jazz playing softly in the background. The butter garlic prawns were worth the entire trip alone.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">AR</div>
+          <div>
+            <div class="reviewer-name">Arjun Rao</div>
+            <div class="reviewer-date">Google Review · 3 weeks ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Celebrated my anniversary here and the team went above and beyond. The private table was decorated beautifully, the food was exceptional, and our server knew every dish inside out. The tres leches is a dream.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">PK</div>
+          <div>
+            <div class="reviewer-name">Priya Kapoor</div>
+            <div class="reviewer-date">Google Review · 1 month ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Best cocktail bar in Andheri, hands down. The mixologists here craft drinks that are genuinely works of art. Paired with the mushroom tagliatelle — I was in heaven. Will be back every month.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">SM</div>
+          <div>
+            <div class="reviewer-name">Siddharth Mehta</div>
+            <div class="reviewer-date">Google Review · 2 months ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">The paneer tikka and chicken lasagna were both outstanding. Great playlist, comfortable seating, and staff who genuinely smile like they enjoy being there. One of the few restaurants in Mumbai where the food matches the aesthetic.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">NK</div>
+          <div>
+            <div class="reviewer-name">Nisha Kulkarni</div>
+            <div class="reviewer-date">Google Review · 3 months ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Brought clients for a dinner meeting and White Charcoal impressed on every level. The warm walnut brownie with ice cream was served flambé at the table — absolutely dramatic and delicious. A restaurant that understands occasion.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">VD</div>
+          <div>
+            <div class="reviewer-name">Vikram Desai</div>
+            <div class="reviewer-date">Google Review · 1 month ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">The vegetarian options here are genuinely exciting — I'm not vegetarian but I ordered the paneer burrito and the loaded nachos over my usual choices. The staff suggested the pairing perfectly. Absolutely stunning space too.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">RS</div>
+          <div>
+            <div class="reviewer-name">Rohan Sharma</div>
+            <div class="reviewer-date">Google Review · 5 weeks ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESERVATION ────────────────────────────────── -->
+<section id="reservation">
+  <div class="container">
+    <div class="reservation-grid">
+      <div class="reservation-image reveal-left">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=900&q=85" alt="Fine Dining Table">
+      </div>
+      <div class="reveal-right">
+        <span class="section-eyebrow">Book Your Table</span>
+        <h2 class="section-title">Reserve Your<br><em>Evening</em></h2>
+        <div class="gold-divider"></div>
+        <p style="color:var(--grey);margin-bottom:2.5rem;line-height:1.9">Secure your table at White Charcoal. For private events and group bookings of 10+, call us directly at <a href="tel:02245424242" style="color:var(--gold);text-decoration:none">022 4542 4242</a>.</p>
+        <form class="reservation-form" onsubmit="submitReservation(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-input" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Date</label>
+              <input type="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time</label>
+              <select class="form-input" required>
+                <option value="" disabled selected>Select Time</option>
+                <option>07:30 PM</option>
+                <option>08:00 PM</option>
+                <option>08:30 PM</option>
+                <option>09:00 PM</option>
+                <option>09:30 PM</option>
+                <option>10:00 PM</option>
+                <option>10:30 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number of Guests</label>
+            <select class="form-input" required>
+              <option value="" disabled selected>Select Guests</option>
+              <option>1 Guest</option>
+              <option>2 Guests</option>
+              <option>3 Guests</option>
+              <option>4 Guests</option>
+              <option>5 Guests</option>
+              <option>6 Guests</option>
+              <option>7–10 Guests</option>
+              <option>10+ Guests (Private Event)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Special Requests</label>
+            <textarea class="form-input" placeholder="Dietary requirements, occasion, seating preference…"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Confirm Reservation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FACILITIES ─────────────────────────────────── -->
+<section id="facilities">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto" class="reveal">
+      <span class="section-eyebrow">At White Charcoal</span>
+      <h2 class="section-title">Everything You<br><em>Need & More</em></h2>
+    </div>
+    <div class="facilities-grid">
+      <div class="facility-item reveal">
+        <div class="facility-icon">♿</div>
+        <div class="facility-name">Wheelchair Accessible</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🚗</div>
+        <div class="facility-name">Free Parking</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🅿️</div>
+        <div class="facility-name">Street Parking</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🍸</div>
+        <div class="facility-name">Full Bar</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🎵</div>
+        <div class="facility-name">Live Music</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🔒</div>
+        <div class="facility-name">Private Dining</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🛵</div>
+        <div class="facility-name">Delivery</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🥡</div>
+        <div class="facility-name">Takeaway</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🍽️</div>
+        <div class="facility-name">Dine In</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">☕</div>
+        <div class="facility-name">Premium Coffee</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🍹</div>
+        <div class="facility-name">Cocktails</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🍷</div>
+        <div class="facility-name">Fine Wine</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🌿</div>
+        <div class="facility-name">Vegetarian Menu</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">🍮</div>
+        <div class="facility-name">Dessert Menu</div>
+      </div>
+      <div class="facility-item reveal">
+        <div class="facility-icon">📷</div>
+        <div class="facility-name">Instagram-Worthy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 5rem" class="reveal">
+      <span class="section-eyebrow">Find Us</span>
+      <h2 class="section-title">Come Find<br><em>Your Table</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-map reveal-left">
+        <iframe
+          src="https://maps.google.com/maps?q=636+SAB+TV+Rd+Andheri+West+Mumbai&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="White Charcoal Restaurant Location">
+        </iframe>
+      </div>
+      <div class="contact-info reveal-right">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Address</div>
+            <div class="contact-item-value">636, SAB TV Rd, Laxmi Industrial Estate,<br>Suresh Nagar, Andheri West,<br>Mumbai, Maharashtra 400053</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Reservations</div>
+            <div class="contact-item-value">
+              <a href="tel:02245424242">022 4542 4242</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-item-label">Opening Hours</div>
+            <div class="contact-item-value">
+              <div class="hours-row">
+                <span class="hours-day">Monday – Sunday</span>
+                <span class="hours-time">7:30 AM – 11:30 PM</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Kitchen Last Orders</span>
+                <span class="hours-time">11:00 PM</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Bar Last Orders</span>
+                <span class="hours-time">11:20 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-item-label">Follow Us</div>
+            <div class="contact-item-value" style="margin-top:0.75rem">
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="Instagram">IG</a>
+                <a href="#" class="social-link" aria-label="Facebook">FB</a>
+                <a href="#" class="social-link" aria-label="WhatsApp">WA</a>
+                <a href="#" class="social-link" aria-label="Zomato">ZO</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">White Charcoal</span>
+      <p class="footer-tagline">Where every meal is a memory, every evening an occasion, and every guest a guest of honour.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Instagram">IG</a>
+        <a href="#" class="social-link" aria-label="Facebook">FB</a>
+        <a href="#" class="social-link" aria-label="WhatsApp">WA</a>
+        <a href="#" class="social-link" aria-label="Zomato">ZO</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#menu">Our Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#reservation">Reserve a Table</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:02245424242">022 4542 4242</a></li>
+        <li><a href="mailto:hello@whitecharcoal.in">hello@whitecharcoal.in</a></li>
+        <li>636, SAB TV Rd</li>
+        <li>Andheri West, Mumbai</li>
+        <li>Maharashtra 400053</li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Hours</div>
+      <ul class="footer-links">
+        <li style="color:var(--grey);font-size:0.875rem">Open Daily</li>
+        <li style="color:var(--gold);font-size:0.95rem;font-family:var(--serif)">7:30 AM – 11:30 PM</li>
+        <li style="margin-top:1rem;color:var(--grey);font-size:0.875rem">Kitchen closes 11:00 PM</li>
+        <li style="color:var(--grey);font-size:0.875rem">Bar closes 11:20 PM</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 White Charcoal Restaurant. All rights reserved. · Mumbai, India</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── LOADER ─────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  const line=document.getElementById('loader-line');
+  const sub=document.getElementById('loader-sub');
+  const loader=document.getElementById('loader');
+  setTimeout(()=>{line.classList.add('active');sub.classList.add('active')},100);
+  setTimeout(()=>{loader.classList.add('hidden')},2200);
+});
+
+// ─── CURSOR ──────────────────────────────────────────
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+function animateRing(){
+  rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+document.querySelectorAll('a,button,.menu-card,.gallery-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursor.style.transform='translate(-50%,-50%) scale(2)';
+    ring.style.transform='translate(-50%,-50%) scale(1.5)';
+    ring.style.borderColor='rgba(212,175,55,0.8)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursor.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.borderColor='rgba(212,175,55,0.6)';
+  });
+});
+
+// ─── NAVIGATION ──────────────────────────────────────
+const nav=document.getElementById('mainNav');
+const floatReserve=document.getElementById('floatReserve');
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  nav.classList.toggle('scrolled',sy>80);
+  floatReserve.classList.toggle('visible',sy>400);
+});
+
+// ─── HERO SLIDER ─────────────────────────────────────
+let currentSlide=0;
+const slides=document.querySelectorAll('.hero-slide');
+const dots=document.querySelectorAll('.hero-dot');
+function goToSlide(n){
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide=n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+setInterval(()=>{goToSlide((currentSlide+1)%slides.length)},5000);
+
+// ─── SCROLL REVEAL ───────────────────────────────────
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>observer.observe(el));
+
+// ─── MENU TABS ───────────────────────────────────────
+function switchTab(id){
+  document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── GALLERY LIGHTBOX ────────────────────────────────
+function openLightbox(src){
+  const lb=document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src=src;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+
+// ─── RESERVATION FORM ────────────────────────────────
+function submitReservation(e){
+  e.preventDefault();
+  const toast=document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),3500);
+  e.target.reset();
+}
+
+// ─── PARALLAX (subtle) ───────────────────────────────
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  const heroBg=document.querySelector('.hero-slides');
+  if(heroBg) heroBg.style.transform=`translateY(${sy*0.25}px)`;
+});
+
+// ─── SMOOTH ANCHOR SCROLLING ─────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+});
+</script>
+</body>
+</html>
